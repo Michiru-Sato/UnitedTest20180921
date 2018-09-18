@@ -1,0 +1,75 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=x-sjis">
+<title>走れマリオ</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(window).keydown(function(e) {
+
+	var src = $('#mario').children('img').attr('src'); 							//現在のマリオ画像取得します
+	var now_mario = parseInt( $('#mario').children('img').css('margin-left') );	//現在のマリオの位置を取得します
+	var window_size = $(window).width();										//ウィンドウサイズ（横幅）を取得します
+	var window_start = 0;														//マリオのスタート位置														
+
+	console.log(window_size);
+	
+	if (e.keyCode === 39) {
+		if(window_size>now_mario){	//現在のマリオの位置がウィンドウサイズ以下の場合右に移動します
+			$('#mario').children('img').animate({'margin-left': '+=30px'},20);
+		}
+			switch(src) {
+			case 'mario_3.png':
+			case 'mario_4.png':
+			case 'mario_6.png':
+				$('#mario').children('img').attr('src','mario_1.png');
+			break;
+
+			case 'mario_1.png':
+				$('#mario').children('img').attr('src','mario_2.png');
+			break;
+			
+			case 'mario_2.png':
+			case 'mario_5.png':
+				$('#mario').children('img').attr('src','mario_3.png');
+			break;			}
+	}		
+		
+	if (e.keyCode === 37) {	
+		if(window_start<now_mario){	//現在のマリオの位置がスタート位置以上の場合移動します
+			$('#mario').children('img').animate({'margin-left': '-=30px'},20);		
+		}
+		switch(src) {
+			case 'mario_1.png':
+			case 'mario_3.png':
+			case 'mario_6.png':
+				$('#mario').children('img').attr('src','mario_4.png');
+			break;
+			case 'mario_4.png':
+				$('#mario').children('img').attr('src','mario_5.png');
+			break;
+			case 'mario_2.png':
+			case 'mario_5.png':
+				$('#mario').children('img').attr('src','mario_6.png');
+			break;
+		}
+	}	
+});            
+
+</script>
+<style type="text/css">
+	div{		
+		margin-top: 700px;
+	}
+	#mario{
+		margin=left: 0px;
+	}	
+</style>
+</head>
+<body>
+
+<div id="mario">
+	<img src="mario_1.png" alt="マリオ" >
+</div>
+</body>
+</html>
